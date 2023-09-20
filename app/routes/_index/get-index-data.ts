@@ -1,6 +1,20 @@
+import type { Image, ListRes } from "@/utils/fetchNewt";
 import { fetchNewt } from "@/utils/fetchNewt";
 
-type Section<Data = any> = {
+export type Page = {
+  pageName: string;
+  slug: string;
+  meta: {
+    title: string;
+    description: string;
+    ogImage: Image | null;
+  };
+  sections: Section[];
+};
+
+export type Section = HeroSection | CTASection | FAQSection;
+
+type SectionBase<Data> = {
   _id: string;
   type: "Hero" | "Logo" | "CTA" | "FAQ";
   data: Data;
@@ -33,7 +47,7 @@ export type HeroData = {
   backgroundImage: BackgroundImage;
 };
 
-export type HeroSection = { type: "Hero" } & Section<HeroData>;
+export type HeroSection = { type: "Hero" } & SectionBase<HeroData>;
 
 export type CTAData = {
   titleCopy: string;
@@ -41,7 +55,7 @@ export type CTAData = {
   ctaButton: CtaButton;
 };
 
-export type CTASection = { type: "CTA" } & Section<CTAData>;
+export type CTASection = { type: "CTA" } & SectionBase<CTAData>;
 
 export type FAQData = {
   titleCopy: string;
@@ -54,11 +68,13 @@ type FAQItem = {
   _id: string;
 };
 
-export type FAQSection = { type: "FAQ" } & Section<FAQData>;
+export type FAQSection = { type: "FAQ" } & SectionBase<FAQData>;
 
 export const getIndexData = async () => {
   const slug = `page-1`;
-  const res = await fetchNewt(`/landing-page/landing-page?slug=${slug}`);
+  const res = await fetchNewt<ListRes<Page>>(
+    `/landing-page/landing-page?slug=${slug}`
+  );
   const item = res.items?.[0];
   if (!item) throw new Error(`No data found for slug ${slug}`);
 
