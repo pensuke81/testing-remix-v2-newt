@@ -7,6 +7,7 @@ import type { Page } from "./get-index-data";
 import { getIndexData } from "./get-index-data";
 import { useLoaderData } from "@remix-run/react";
 import { Hero } from "./Hero";
+import { FAQ } from "./FAQ";
 
 export const meta: MetaFunction = () => {
   return [
@@ -28,7 +29,14 @@ export default function Index() {
   return (
     <div>
       {data.sections.map((section) => {
-        return section.type === "Hero" && <Hero {...section.data} />;
+        switch (section.type) {
+          case "Hero":
+            return <Hero {...section.data} />;
+          case "FAQ":
+            return <FAQ {...section.data} />;
+          default:
+            return null;
+        }
       })}
     </div>
   );
