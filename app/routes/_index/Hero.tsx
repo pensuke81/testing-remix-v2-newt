@@ -19,11 +19,9 @@ export function Hero({
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
+              <span className="font-bold text-xl">
+                Remix v2 with Newt Demo Site
+              </span>
             </a>
           </div>
           <div className="flex lg:hidden">
@@ -57,7 +55,10 @@ export function Hero({
               dangerouslySetInnerHTML={{ __html: titleCopy }}
             ></h1>
             <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
-              <p className="text-lg leading-8 text-gray-600">{shoulderCopy}</p>
+              <p
+                className="text-lg leading-8 text-gray-600"
+                dangerouslySetInnerHTML={{ __html: text }}
+              />
               <div className="mt-10 flex items-center gap-x-6">
                 <a
                   href={ctaButton.url}
@@ -70,7 +71,7 @@ export function Hero({
             <img
               src={backgroundImage.src}
               alt=""
-              className="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
+              className="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-contain sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
             />
           </div>
         </div>
