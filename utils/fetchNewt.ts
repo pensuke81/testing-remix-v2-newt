@@ -33,7 +33,7 @@ export type SystemResponse = {
   };
 };
 
-export const fetchNewt = async (
+export const fetchNewt = async <T = any>(
   path: string,
   requestInitr?: FetchParams[1]
 ) => {
@@ -46,5 +46,5 @@ export const fetchNewt = async (
       ...requestInitr,
     }
   );
-  return (await res.json()) as any;
+  return (await res.json()) as T;
 };
